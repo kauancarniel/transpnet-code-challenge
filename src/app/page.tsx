@@ -5,6 +5,7 @@ import { requestApi } from "../service/request";
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import SearchBar from "@/components/SearchBar";
+import TableProducts from "@/components/TableProducts";
 
 export default function Home() {
   const [apiData, setApiData] = useState<IProduct[] | undefined>(undefined);
@@ -34,6 +35,7 @@ export default function Home() {
   return (
     <div className="mb-15">
       <SearchBar setApiData={setApiData} defaultApiData={defaultApiData} />
+      <TableProducts apiData={ currentItems }/>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-4 gap-4">
         { currentItems.map((product: IProduct) => (
           <ProductCard product={product} key={product.id} />
