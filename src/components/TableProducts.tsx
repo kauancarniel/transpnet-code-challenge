@@ -1,7 +1,7 @@
 'use client'
 
 import { IProduct } from '@/interfaces/IProduct';
-import { createTheme, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material';
+import { Paper, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Table from '@mui/material/Table';
 import Link from 'next/link';
 
@@ -17,10 +17,7 @@ export default function TableProducts({ apiData }: {apiData: IProduct[]}) {
     return createData(product.title, product.category, product.price, product.stock, product.tags, product.id);
   });
 
-  const theme = createTheme({ palette: { mode: 'dark' }});
-
   return (
-    <ThemeProvider theme={theme}>
       <TableContainer component={Paper} sx={{display: 'flex', justifyContent: 'center'}}>
         <Table sx={{ maxWidth: 1000, minWidth: 350 }} arial-label="simple table">
           <TableHead>
@@ -47,6 +44,5 @@ export default function TableProducts({ apiData }: {apiData: IProduct[]}) {
           </TableBody>
         </Table>
       </TableContainer>
-    </ThemeProvider>
   );
 }

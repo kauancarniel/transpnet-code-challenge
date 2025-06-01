@@ -5,12 +5,13 @@ import { requestApi } from "../service/request";
 import { useEffect, useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import TableProducts from "@/components/TableProducts";
+import { createTheme, TablePagination, ThemeProvider } from "@mui/material";
 
 export default function Home() {
   const [apiData, setApiData] = useState<IProduct[] | undefined>(undefined);
   const [defaultApiData, setDefaultApiData] = useState<IProduct[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,36 +27,43 @@ export default function Home() {
     return <p className="p-4 text-center mt-10">Loading...</p>;
   };
 
-  const totalPages = Math.ceil(apiData.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const startIndex = page * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
   const currentItems = apiData.slice(startIndex, endIndex);
 
+  const theme = createTheme({ palette: { mode: 'dark' }});
+
   return (
+    
+    <ThemeProvider theme={theme}>
     <div className="mb-15">
       <SearchBar setApiData={setApiData} defaultApiData={defaultApiData} />
       <TableProducts apiData={ currentItems }/>
       <div className="flex justify-center items-center gap-4 mt-6">
-        <button
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-        >
-          Previous
-        </button>
-
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-
-        <button
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-        >
-          Next
-        </button>
+        <TablePagination 
+          component="div"
+          count={apiData.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </div>
     </div>
+    </ThemeProvider>
   );
 }
