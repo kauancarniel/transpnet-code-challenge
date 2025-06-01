@@ -3,7 +3,6 @@
 import { IProduct } from "@/interfaces/IProduct";
 import { requestApi } from "../service/request";
 import { useEffect, useState } from "react";
-import ProductCard from "@/components/ProductCard";
 import SearchBar from "@/components/SearchBar";
 import TableProducts from "@/components/TableProducts";
 
@@ -36,11 +35,6 @@ export default function Home() {
     <div className="mb-15">
       <SearchBar setApiData={setApiData} defaultApiData={defaultApiData} />
       <TableProducts apiData={ currentItems }/>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-4 gap-4">
-        { currentItems.map((product: IProduct) => (
-          <ProductCard product={product} key={product.id} />
-        )) }
-      </div>
       <div className="flex justify-center items-center gap-4 mt-6">
         <button
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}

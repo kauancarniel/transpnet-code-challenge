@@ -8,13 +8,13 @@ import Link from 'next/link';
 export default function TableProducts({ apiData }: {apiData: IProduct[]}) {
 
   const createData = (
-    name: string, category: string, price: number, stock: number, tags: string[]
+    name: string, category: string, price: number, stock: number, tags: string[], id: number,
   ) => {
-    return { name, category, price, stock, tags }
+    return { name, category, price, stock, tags, id }
   };
 
   const rows = apiData.map((product) => {
-    return createData(product.title, product.category, product.price, product.stock, product.tags);
+    return createData(product.title, product.category, product.price, product.stock, product.tags, product.id);
   });
 
   const theme = createTheme({ palette: { mode: 'dark' }});
@@ -41,9 +41,7 @@ export default function TableProducts({ apiData }: {apiData: IProduct[]}) {
                 <TableCell align="center">{product.price}</TableCell>
                 <TableCell align="center">{product.stock}</TableCell>
                 <TableCell align="center">{product.tags}</TableCell>
-                <Link href={`/ProductDetails/${product.name}`}>
-                  <TableCell>Mostrar detalhes</TableCell>
-                </Link>
+                <TableCell><Link href={`/ProductDetails/${product.id}`}>Mostrar detalhes</Link></TableCell>
               </TableRow>
             )) }
           </TableBody>

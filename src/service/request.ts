@@ -13,3 +13,10 @@ export const searchRequestApi = async (searchTerm: string) => {
   const products: IProduct[] = data.products;
   return products
 };
+
+export const getProductById = async (id: number) => {
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  const data = await response.json();
+  const product: IProduct = data;
+  return product
+};
