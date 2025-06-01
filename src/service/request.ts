@@ -6,3 +6,10 @@ export const requestApi = async () => {
     const products: IProduct[] = data.products;
     return products
   }
+
+export const searchRequestApi = async (searchTerm: string) => {
+  const response = await fetch(`https://dummyjson.com/products/search?q=${searchTerm}`);
+  const data = await response.json();
+  const products: IProduct[] = data.products;
+  return products
+};

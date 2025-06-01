@@ -3,27 +3,28 @@
 import { IProduct } from "@/interfaces/IProduct";
 import { requestApi } from "../service/request";
 import { useEffect, useState } from "react";
-import ProductCard from "@/components/ProductCart";
+import ProductCard from "@/components/ProductCard";
+import SearchBar from "@/components/SearchBar";
 
 export default function Home() {
   const [apiData, setApiData] = useState<IProduct[] | undefined>(undefined);
-  const [defaultApiData, setDefaultApiData] = useState<IProduct[] | undefined>(undefined);
+  const [defaultApiData, setDefaultApiData] = useState<IProduct[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await requestApi();
-      setApiData(data)
+      setApiData(data);
+      setDefaultApiData(data);
       console.log(data);
-      
     };
     fetchData();
   }, [])
 
   if (!apiData) {
     return <p className="p-4 text-center mt-10">Loading...</p>;
-  }
+  };
 
   const totalPages = Math.ceil(apiData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -32,6 +33,7 @@ export default function Home() {
 
   return (
     <div className="mb-15">
+      <SearchBar setApiData={setApiData} defaultApiData={defaultApiData} />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-4 gap-4">
         { currentItems.map((product: IProduct) => (
           <ProductCard product={product} key={product.id} />
