@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import TableProducts from "@/components/TableProducts";
 import { createTheme, TablePagination, ThemeProvider } from "@mui/material";
+import Filters from "@/components/Filters";
 
 export default function Home() {
   const [apiData, setApiData] = useState<IProduct[] | undefined>(undefined);
@@ -48,10 +49,10 @@ export default function Home() {
   const theme = createTheme({ palette: { mode: 'dark' }});
 
   return (
-    
     <ThemeProvider theme={theme}>
     <div className="mb-15">
       <SearchBar setApiData={setApiData} defaultApiData={defaultApiData} />
+      <Filters setApiData={ setApiData } defaultApiData={ defaultApiData } />
       <TableProducts apiData={ currentItems }/>
       <div className="flex justify-center items-center gap-4 mt-6">
         <TablePagination 

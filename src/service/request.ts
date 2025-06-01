@@ -1,3 +1,4 @@
+import { ICategoty } from "@/interfaces/Icategory";
 import { IProduct } from "@/interfaces/IProduct";
 
 export const requestApi = async () => {
@@ -19,4 +20,18 @@ export const getProductById = async (id: number) => {
   const data = await response.json();
   const product: IProduct = data;
   return product
+};
+
+export const getAllCategories = async () => {
+  const response = await fetch('https://dummyjson.com/products/categories');
+  const data = await response.json();
+  const allCategories: ICategoty[] = data;
+  return allCategories
+};
+
+export const getByCategories = async (category: string) => {
+  const response = await fetch(`https://dummyjson.com/products/category/${category}`);
+  const data = await response.json();
+  const allCategories = data;
+  return allCategories
 };
