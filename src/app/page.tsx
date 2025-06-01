@@ -7,6 +7,7 @@ import ProductCard from "@/components/ProductCart";
 
 export default function Home() {
   const [apiData, setApiData] = useState<IProduct[] | undefined>(undefined);
+  const [defaultApiData, setDefaultApiData] = useState<IProduct[] | undefined>(undefined);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -30,7 +31,7 @@ export default function Home() {
   const currentItems = apiData.slice(startIndex, endIndex);
 
   return (
-    <div>
+    <div className="mb-15">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-4 gap-4">
         { currentItems.map((product: IProduct) => (
           <ProductCard product={product} key={product.id} />
