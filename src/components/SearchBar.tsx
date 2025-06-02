@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from 'react';
 import { IProduct } from '@/interfaces/IProduct';
 import { searchRequestApi } from '@/service/request';

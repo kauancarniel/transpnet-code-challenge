@@ -7,6 +7,7 @@ import SearchBar from "@/components/SearchBar";
 import TableProducts from "@/components/TableProducts";
 import { createTheme, TablePagination, ThemeProvider } from "@mui/material";
 import Filters from "@/components/Filters";
+import Sorter from "@/components/Sorter";
 
 export default function Home() {
   const [apiData, setApiData] = useState<IProduct[] | undefined>(undefined);
@@ -50,12 +51,15 @@ export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-    <div className="mb-15">
-      <SearchBar setApiData={setApiData} defaultApiData={defaultApiData} />
-      <Filters setApiData={ setApiData } defaultApiData={ defaultApiData } />
-      <TableProducts apiData={ currentItems }/>
-      <div className="flex justify-center items-center gap-4 mt-6">
+      <div className="mb-15">
+        <SearchBar setApiData={setApiData} defaultApiData={defaultApiData} />
+        <div className="flex flex-row">
+          <Filters setApiData={ setApiData } defaultApiData={ defaultApiData } />
+          <Sorter setApiData={ setApiData } defaultApiData={ defaultApiData } />
+        </div>
+        <TableProducts apiData={ currentItems }/>
         <TablePagination 
+          className="flex justify-center items-center gap-4 mt-6"
           component="div"
           count={apiData.length}
           page={page}
@@ -64,7 +68,6 @@ export default function Home() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </div>
-    </div>
     </ThemeProvider>
   );
 }

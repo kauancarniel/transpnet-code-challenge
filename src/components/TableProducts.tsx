@@ -22,11 +22,11 @@ export default function TableProducts({ apiData }: {apiData: IProduct[]}) {
         <Table sx={{ maxWidth: 1000, minWidth: 350 }} arial-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Nome</TableCell>
-              <TableCell align="center">Categoria</TableCell>
-              <TableCell align="center">Preço</TableCell>
-              <TableCell align="center">Estoque</TableCell>
-              <TableCell align="center">Etiquetas</TableCell>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Category</TableCell>
+              <TableCell align="center">Price</TableCell>
+              <TableCell align="center">Stock</TableCell>
+              <TableCell align="center">Tags</TableCell>
               <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
@@ -38,7 +38,7 @@ export default function TableProducts({ apiData }: {apiData: IProduct[]}) {
                 <TableCell align="center">{product.price}</TableCell>
                 <TableCell align="center">{product.stock}</TableCell>
                 <TableCell align="center">{product.tags}</TableCell>
-                <TableCell><Link href={`/ProductDetails/${product.id}`}>Mostrar detalhes</Link></TableCell>
+                <TableCell><Link className="text-blue-500 hover:text-blue-600" href={`/ProductDetails/${product.id}`}>Show More Details</Link></TableCell>
               </TableRow>
             )) }
           </TableBody>

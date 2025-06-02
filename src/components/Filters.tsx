@@ -29,7 +29,7 @@ export default function Filters({ setApiData, defaultApiData }: {setApiData: (va
 
   return (
     <div className="ml-5">
-      <span className="mr-2">Filter by:</span>
+      <span className="mr-2">Filter by Categories:</span>
       <select 
         className='bg-gray-900 text-gray-100 text-sm rounded-md px-3 py-1.5 border border-gray-700 
             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
@@ -41,7 +41,6 @@ export default function Filters({ setApiData, defaultApiData }: {setApiData: (va
           <option key={ category.name } value={category.name}>{category.name}</option>
         )) }
       </select>
-      {/* <span className="ml-6">Order By</span> */}
     </div>
   );
 }
