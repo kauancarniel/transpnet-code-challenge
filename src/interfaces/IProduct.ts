@@ -1,10 +1,16 @@
+type reviewsType = [{
+  rating: number,
+  comment: string[],
+  reviewerName: string,
+  date: string,
+}]
+
 export interface IProduct {
   id: number;
   title: string;
   description: string;
   category: string;
   price: number;
-  discountPercentage: number;
   rating: number;
   stock: number;
   tags: string[];
@@ -18,4 +24,5 @@ export interface IProduct {
   minimumOrderQuantity: number;
   images: string[];
   thumbnail: string;
+  reviews: reviewsType
 }

@@ -3,9 +3,9 @@
 import { IProduct } from "@/interfaces/IProduct";
 import { requestApi } from "../service/request";
 import { useEffect, useState } from "react";
+import { createTheme, TablePagination, ThemeProvider } from "@mui/material";
 import SearchBar from "@/components/SearchBar";
 import TableProducts from "@/components/TableProducts";
-import { createTheme, TablePagination, ThemeProvider } from "@mui/material";
 import Filters from "@/components/Filters";
 import Sorter from "@/components/Sorter";
 
@@ -20,7 +20,6 @@ export default function Home() {
       const data = await requestApi();
       setApiData(data);
       setDefaultApiData(data);
-      console.log(data);
     };
     fetchData();
   }, [])
@@ -70,4 +69,4 @@ export default function Home() {
       </div>
     </ThemeProvider>
   );
-}
+};
