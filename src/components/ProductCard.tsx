@@ -8,7 +8,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
         <Link href="/" className="text-sm text-blue-600 hover:underline mb-6 inline-block">
           ← Back to Home
         </Link>
-        <div className="bg-gray-900 rounded-2xl shadow-lg p-8 flex flex-col md:flex-row gap-8">          
+        <div className="bg-gray-900 rounded-2xl shadow-lg p-8 flex flex-col md:flex-row gap-8 mb-10">
           <div className="flex-1 flex items-center justify-center">
             <img
               src={product.thumbnail}
@@ -18,11 +18,9 @@ export default function ProductCard({ product }: { product: IProduct }) {
           </div>
           <div className="flex-1 flex flex-col justify-center space-y-4">
             <h1 className="text-3xl font-bold">{product.title}</h1>
-
             <p className="text-gray-200 text-base">
               <strong>Description:</strong> {product.description}
             </p>
-
             <div className="text-sm text-gray-300 space-y-1">
               <p><strong>Category:</strong> {product.category}</p>
               <p><strong>Rating:</strong> {product.rating}</p>
@@ -33,6 +31,18 @@ export default function ProductCard({ product }: { product: IProduct }) {
               Add to Cart
             </button>
           </div>
+        </div>
+        <h2 className="text-2xl font-bold mb-4">Comments:</h2>
+        <div className="space-y-4">
+          {product.reviews.map((review, index) => (
+            <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-md">
+              <h3 className="text-lg font-semibold text-blue-400">{review.reviewerName}</h3>
+              <p className={`text-sm font-medium ${review.rating >= 4 ? 'text-green-400' : review.rating >= 2 ? 'text-yellow-400' : 'text-red-400'}`}>
+                Rating: {review.rating}
+              </p>
+              <p className="text-gray-200 mt-2">{review.comment}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
