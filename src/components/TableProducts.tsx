@@ -35,7 +35,7 @@ export default function TableProducts({ apiData }: {apiData: IProduct[]}) {
               <TableRow key={ product.name } sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="center">{product.name}</TableCell>
                 <TableCell align="center">{product.category}</TableCell>
-                <TableCell align="center">{product.price}</TableCell>
+                <TableCell align="center">${product.price}</TableCell>
                 <TableCell align="center">{product.stock}</TableCell>
                 <TableCell align="center">{product.tags}</TableCell>
                 <TableCell><Link className="text-blue-500 hover:text-blue-600" href={`/ProductDetails/${product.id}`}>Show More Details</Link></TableCell>
